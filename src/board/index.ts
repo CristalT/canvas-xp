@@ -8,7 +8,7 @@ enum MouseState {
 
 type AppContext = { canvas: Canvas; overlay: Canvas };
 
-interface Drawable {
+interface DrawableElement {
     new (name: ShapeSettings): Shape
 }
 
@@ -25,7 +25,7 @@ class Board {
         return this.ctx;
     }
 
-    draw(drawable: Drawable, settings: ShapeSettings) {
+    draw(drawable: DrawableElement, settings: ShapeSettings) {
         let mouse: MouseState;
         let shape: Shape;
         this.ctx.overlay.el.addEventListener('mousedown', (e) => {

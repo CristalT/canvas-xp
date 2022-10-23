@@ -1,27 +1,35 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { Canvas } from 'board';
+import { Canvas } from '../../src/board';
 
 describe('Canvas', () => {
-    let selector: HTMLDivElement | null;
+    let selector: HTMLDivElement;
     beforeEach(() => {
         selector = document.createElement('div');
     });
     afterEach(() => {
-        selector = null;
-    })
+        selector.remove()
+    });
 
-    it('initializes with default values', () => {
-        const canvas = new Canvas(selector);
-        expect(canvas.width).toBe(1024);
-        expect(canvas.height).toBe(768);
+    it('creates a canvas with default values', () => {
+        new Canvas(selector);
         expect(selector!.innerHTML).toEqual('<canvas width="1024" height="768"></canvas>');
     });
 
     it('sets background color', () => {
-        const canvas = new Canvas(selector)
-        canvas.context.fillRect = vi.fn()
+        const canvas = new Canvas(selector);
+        canvas.ctx.fillRect = vi.fn();
         canvas.setBackground('red');
-        expect(canvas.ctx.fillStyle).toEqual('#ff0000')
-        expect(canvas.context.fillRect).toBeCalledWith(0, 0, 1024, 768)
-    })
+        expect(canvas.ctx.fillStyle).toEqual('#ff0000');
+        expect(canvas.ctx.fillRect).toBeCalledWith(0, 0, 1024, 768);
+    });
+
+    it('returns canvas element', () => {
+        const canvas = new Canvas(selector);
+        expect(canvas.el instanceof HTMLCanvasElement).toBeTruthy();
+    });
+
+    it('returns canvas context', () => {
+        const canvas = new Canvas(selector);
+        expect(canvas.ctx.canvas instanceof HTMLCanvasElement).toBeTruthy();
+    });
 });

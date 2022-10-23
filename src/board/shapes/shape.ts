@@ -10,6 +10,10 @@ interface ShapeInterface {
     setFrom(x: number, y: number): void;
 
     setTo(x: number, y: number): void;
+
+    getPosition(): { x: number; y: number };
+
+    getDimension(): { width: number; height: number };
 }
 
 export abstract class Shape implements ShapeInterface {
@@ -17,8 +21,16 @@ export abstract class Shape implements ShapeInterface {
     protected y: number = 0;
     protected width: number = 0;
     protected height: number = 0;
-
-    protected constructor(protected settings: ShapeSettings) {}
+    protected settings: ShapeSettings = {
+        backgroundColor: 'red',
+        borderWidth: 1,
+        borderColor: 'green',
+    };
+    protected constructor(protected defaultSettings?: ShapeSettings) {
+        if (defaultSettings) {
+            Object.assign(this.settings, defaultSettings);
+        }
+    }
 
     setFrom(x: number, y: number) {
         this.x = x;
@@ -28,6 +40,20 @@ export abstract class Shape implements ShapeInterface {
     setTo(x: number, y: number) {
         this.width = x - this.x;
         this.height = y - this.y;
+    }
+
+    getPosition() {
+        return {
+            x: this.x,
+            y: this.y,
+        };
+    }
+
+    getDimension() {
+        return {
+            width: this.width,
+            height: this.height,
+        };
     }
 
     abstract draw(canvas: Canvas): Shape;

@@ -1,5 +1,5 @@
 import './style.css';
-import { initBoard, Rect } from 'board';
+import { initBoard, Rect } from './board';
 
 const board = initBoard();
 

@@ -7,7 +7,7 @@ export class Rect extends Shape {
     protected declare width: number;
     protected declare height: number;
 
-    constructor(settings: ShapeSettings) {
+    constructor(settings?: ShapeSettings) {
         super(settings);
     }
 
