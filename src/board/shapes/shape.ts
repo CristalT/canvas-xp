@@ -22,9 +22,9 @@ export abstract class Shape implements ShapeInterface {
     protected width: number = 0;
     protected height: number = 0;
     protected settings: ShapeSettings = {
-        backgroundColor: 'red',
+        backgroundColor: 'transparent',
         borderWidth: 1,
-        borderColor: 'green',
+        borderColor: 'black',
     };
     protected constructor(protected defaultSettings?: ShapeSettings) {
         if (defaultSettings) {

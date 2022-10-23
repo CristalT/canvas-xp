@@ -9,27 +9,27 @@ enum MouseState {
 type AppContext = { canvas: Canvas; overlay: Canvas };
 
 interface DrawableElement {
-    new (name: ShapeSettings): Shape
+    new (name?: ShapeSettings): Shape;
 }
 
 class Board {
     private ctx: AppContext;
-    private stack: Shape[] = []
+    private stack: Shape[] = [];
 
     init(): AppContext {
         const canvas = new Canvas(document.body.querySelector('#app')!);
-        canvas.setBackground('#ccc');
+        canvas.setBackground('#f4f5f7');
         const overlay = new Canvas(document.body.querySelector('#app')!);
 
         this.ctx = { canvas, overlay };
         return this.ctx;
     }
 
-    draw(drawable: DrawableElement, settings: ShapeSettings) {
+    draw(drawable: DrawableElement, settings?: ShapeSettings) {
         let mouse: MouseState;
         let shape: Shape;
         this.ctx.overlay.el.addEventListener('mousedown', (e) => {
-            shape = new drawable(settings)
+            shape = new drawable(settings);
             e.preventDefault();
             e.stopPropagation();
             mouse = MouseState.Down;
@@ -52,7 +52,7 @@ class Board {
             e.stopPropagation();
             mouse = MouseState.Up;
             this.stack.push(shape.draw(this.ctx.canvas));
-            console.log(this.stack)
+            console.log(this.stack);
         });
     }
 }

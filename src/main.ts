@@ -3,8 +3,4 @@ import { initBoard, Rect } from './board';
 
 const board = initBoard();
 
-board.draw(Rect, {
-    backgroundColor: 'lightgreen',
-    borderColor: 'black',
-    borderWidth: 1,
-});
+board.draw(Rect);
