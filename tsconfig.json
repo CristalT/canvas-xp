@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": "./",
         "strictPropertyInitialization": false,
         "target": "ESNext",
         "useDefineForClassFields": true,
@@ -16,9 +17,8 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "skipLibCheck": true,
-        "paths": {
-            "board/*": ["./src/board/*"]
-        }
     },
-    "include": ["src"]
+    "include": ["**/*.ts"],
+    "exclude": ["node_modules"],
+    
 }
