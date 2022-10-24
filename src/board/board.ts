@@ -16,13 +16,30 @@ class Board {
     private ctx: AppContext;
     private stack: Shape[] = [];
 
+    constructor(
+        private selector: HTMLDivElement,
+        private width: number,
+        private height: number,
+        private background: string
+    ) {}
+
     init(): AppContext {
-        const canvas = new Canvas(document.body.querySelector('#app')!);
-        canvas.setBackground('#f4f5f7');
-        const overlay = new Canvas(document.body.querySelector('#app')!);
+        const canvas = new Canvas(this.selector, this.width, this.height);
+        const overlay = new Canvas(this.selector, this.width, this.height);
 
         this.ctx = { canvas, overlay };
+
+        canvas.setBackground(this.background);
+
         return this.ctx;
+    }
+
+    getCanvas() {
+        return this.ctx.canvas;
+    }
+
+    getOverlay() {
+        return this.ctx.overlay;
     }
 
     draw(drawable: DrawableElement, settings?: ShapeSettings) {
@@ -56,8 +73,13 @@ class Board {
     }
 }
 
-export function initBoard() {
-    const engine = new Board();
-    engine.init();
-    return engine;
+export function initBoard(
+    selector: HTMLDivElement,
+    width: number = 1024,
+    height: number = 768,
+    background = '#f4f5f7'
+) {
+    const board = new Board(selector, width, height, background);
+    board.init();
+    return board;
 }
