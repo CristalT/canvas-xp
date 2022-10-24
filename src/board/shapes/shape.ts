@@ -1,9 +1,9 @@
 import { Canvas } from '../canvas';
 
 export type ShapeSettings = {
-    backgroundColor: string;
-    borderColor: string;
-    borderWidth: number;
+    backgroundColor?: string;
+    borderColor?: string;
+    borderWidth?: number;
 };
 
 interface ShapeInterface {

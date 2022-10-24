@@ -13,12 +13,12 @@ export class Rect extends Shape {
 
     draw(canvas: Canvas) {
         // rect
-        canvas.ctx.fillStyle = this.settings.backgroundColor;
+        canvas.ctx.fillStyle = this.settings.backgroundColor || 'transparent';
         canvas.ctx.fillRect(this.x, this.y, this.width, this.height);
 
         // border
         if (this.settings.borderWidth) {
-            canvas.ctx.strokeStyle = this.settings.borderColor;
+            canvas.ctx.strokeStyle = this.settings.borderColor || 'black';
             canvas.ctx.lineWidth = this.settings.borderWidth;
             canvas.ctx.strokeRect(this.x, this.y, this.width, this.height);
         }
